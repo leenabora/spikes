@@ -2,4 +2,8 @@
 **/*.ipr
 **/*.iws
 **/target
-
+**/*.log
+**/*.data
+**/*.redo
+**/lock
+**/.idea
