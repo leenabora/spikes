@@ -1,4 +1,4 @@
-package com.activemq.spike;
+package com.tesco.spike;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
