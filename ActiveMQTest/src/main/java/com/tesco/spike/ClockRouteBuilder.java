@@ -12,6 +12,6 @@ import org.apache.camel.builder.RouteBuilder;
 public class ClockRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("activemq:queue:clockQueue").beanRef("clockListener","receiveMessage");
+        from("jms:queue:clockQueue").beanRef("clockListener","receiveMessage");
     }
 }

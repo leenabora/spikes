@@ -1,7 +1,10 @@
 package com.tesco.spike;
 
 import org.apache.camel.ConsumerTemplate;
-import org.apache.camel.Handler;
+import org.apache.camel.EndpointInject;
+import org.apache.camel.Exchange;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 
 import javax.jms.Message;
 
@@ -14,20 +17,10 @@ import javax.jms.Message;
  */
 public class ClockListener {
 
+    @Autowired
+    public JmsTemplate jmsTemplate;
 
-    ConsumerTemplate consumerTemplate;
-    @Handler
-
-    public void receiveMessage(Message message) {
-//        try {
-            System.out.println("$%$#@$@Message Received >>>>>>");
-//        } catch (JMSException e) {
-//            e.printStackTrace();
-//        }
-
-    }
-
-    public void onMessage(Message message) {
-        System.out.println("Received Msg: "+message.toString());
+    public void receiveMessage(String message) {
+            System.out.println("Message Received >>>>>>"+message);
     }
 }

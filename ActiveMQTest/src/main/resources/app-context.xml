@@ -15,7 +15,7 @@
     <context:annotation-config/>
 
     <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="vm://localhost"/>
+        <property name="brokerURL" value="tcp://localhost:61616"/>
     </bean>
 
     <bean id="cachedConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
@@ -27,43 +27,17 @@
         <constructor-arg value="clockQueue"/>
     </bean>
 
-    <!--<camel:camelContext id="camelContext">-->
-        <!--<camel:routeBuilder ref="orderRouteBuilder" />-->
-    <!--</camel:camelContext>-->
-
-    <!--<bean id="orderRouteBuilder" class="com.test.orderapp.builder.OrderRouteBuilder"></bean>-->
-
+    <bean id="clockRouteBuilder" class="com.tesco.spike.ClockRouteBuilder"></bean>
 
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="cachedConnectionFactory" />
         <property name="defaultDestination" ref="destination" />
     </bean>
 
-
-    <jms:listener-container container-type="default" acknowledge="auto" connection-factory="connectionFactory">
-        <jms:listener destination="clockQueue" ref="clockListener" method="receiveMessage" />
-        <!--<jms:listener destination="orderAck" ref="orderSender" method="receiveOrder"/>-->
-    </jms:listener-container>
-
-    <!--<bean id="listenerContainer" class="org.springframework.jms.listener.SimpleMessageListenerContainer">-->
-        <!--<property name="connectionFactory" ref="connectionFactory"   />-->
-        <!--<property name="destinationName" value="orderQueue" />-->
-        <!--<property name="messageListener" ref="clockListener" />-->
-    <!--</bean>-->
+    <camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring">
+        <routeBuilder ref="clockRouteBuilder" />
+    </camelContext>
 
     <bean id="clockListener" class="com.tesco.spike.ClockListener"></bean>
-
-    <!--<bean id="listenerContainerAck" class="org.springframework.jms.listener.SimpleMessageListenerContainer">-->
-        <!--<property name="connectionFactory" ref="cachedConnectionFactory" />-->
-        <!--<property name="messageListener" ref="orderSender" />-->
-        <!--<property name="destination" ref="destination1" />-->
-    <!--</bean>-->
-
-    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" >-->
-        <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
-    <!--</bean>-->
-    <!--<mongo:mongo id="mydb" host="localhost" port="27017" />-->
-    <!--<mongo:db-factory dbname="tesco" mongo-ref="mongo"/>-->
-
 
 </beans>

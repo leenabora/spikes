@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(value = "/app-context.xml")
+@ContextConfiguration("/app-context.xml")
 public class JMSRouteTest {
 
     @Autowired

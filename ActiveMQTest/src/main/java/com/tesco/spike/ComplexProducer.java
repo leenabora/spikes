@@ -38,8 +38,7 @@ public class ComplexProducer {
         jmsTemplate.send(
                 new MessageCreator() {
                     public Message createMessage(Session session) throws JMSException {
-                        TextMessage textMessage = session.createTextMessage(message);
-                        return textMessage;
+                        return session.createTextMessage(message);
                     }
                 }
         );
