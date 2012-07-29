@@ -29,7 +29,7 @@ public class ComplexProducer {
             if (msg != null) {
                 msg=msg.replace("3", Integer.toString(i));
                 sendMessage(msg);
-                System.out.println("Sent message " + msg);
+                System.out.println(Thread.currentThread().getName()+"Sent message " + msg);
             }
         }
     }

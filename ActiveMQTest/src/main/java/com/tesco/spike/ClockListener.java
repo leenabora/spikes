@@ -21,6 +21,6 @@ public class ClockListener {
     public JmsTemplate jmsTemplate;
 
     public void receiveMessage(String message) {
-            System.out.println("Message Received >>>>>>"+message);
+            System.out.println(Thread.currentThread().getName()+">>>>Message Received >>>>>>"+message);
     }
 }
