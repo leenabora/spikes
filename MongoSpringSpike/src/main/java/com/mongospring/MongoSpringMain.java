@@ -42,18 +42,6 @@ public class MongoSpringMain {
         System.out.println("***************************************************");
 
 
-        //Find count of employees who lives in USA
-        query = new Query(Criteria.where("address.country").ne("USA"));
-        long count=mongoOperation.executeCommand(
-                "{ " +
-                        "\"count\" : \"" + "Employee" + "\"," +
-                        "\"query\" : " + query.getQueryObject().toString() +
-                        " }").getLong("n");
-
-        System.out.println("Count: "+count);
-        System.out.println("***************************************************");
-
-
         //List all employees order by salary  who lives in USA
         query = new Query(Criteria.where("address.country").is("USA"));
         query.sort().on("salary", Order.ASCENDING);
