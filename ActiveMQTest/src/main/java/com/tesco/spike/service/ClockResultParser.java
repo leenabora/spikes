@@ -1,5 +1,6 @@
-package com.tesco.spike;
+package com.tesco.spike.service;
 
+import com.tesco.spike.vo.ClockResult;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -15,15 +16,27 @@ import java.io.ByteArrayInputStream;
 @Component
 public class ClockResultParser {
 
+
+    private final DocumentBuilderFactory dbFactory;
+    private final XPath xpath;
+
+    public ClockResultParser() {
+        dbFactory = DocumentBuilderFactory.newInstance();
+        xpath = XPathFactory.newInstance().newXPath();
+    }
+
     public ClockResult parse(String clockResult) throws Exception {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(new ByteArrayInputStream(clockResult.getBytes()));
         doc.getDocumentElement().normalize();
 
-        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-        XPath xpath = XPathFactory.newInstance().newXPath();
-        //datetime, branch, cashier, till, recieptno
+        String expression = "/ClockResult/Basket/BasketHeader/ClubcardNo";
+        String loyaltyCardNo = getNodeValue(doc, xpath, expression);
+
+        return new ClockResult(loyaltyCardNo, formTransactionNo(doc), clockResult);
+    }
+
+    private String formTransactionNo(Document doc) throws XPathExpressionException {
         String expression = "/ClockResult/Basket/BasketHeader/Date";
         String dateTime = getNodeValue(doc, xpath, expression);
 
@@ -39,16 +52,7 @@ public class ClockResultParser {
         expression = "/ClockResult/Basket/BasketHeader/ReceiptNo";
         String receiptNo = getNodeValue(doc, xpath, expression);
 
-        expression = "/ClockResult/Basket/BasketHeader/ClubcardNo";
-        String loyaltyCardNo = getNodeValue(doc, xpath, expression);
-
-        String transactionNo = dateTime + "-" + branch + "-" + cashier + "-" + tillNo + "-" + receiptNo;
-
-        System.out.println("transactionNo: " + transactionNo);
-        System.out.println("loyaltyCardNo: " + loyaltyCardNo);
-
-        return new ClockResult(loyaltyCardNo, transactionNo, clockResult);
-
+        return dateTime + "-" + branch + "-" + cashier + "-" + tillNo + "-" + receiptNo;
     }
 
     private String getNodeValue(Document doc, XPath xpath, String expression) throws XPathExpressionException {

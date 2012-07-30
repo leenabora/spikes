@@ -1,4 +1,4 @@
-package com.tesco.spike;
+package com.tesco.spike.vo;
 
 public class ClockResult {
 
