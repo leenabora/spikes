@@ -29,13 +29,17 @@ public class ClockResultJDBCDao implements ClockResultDao {
 
     @Override
     public void ingestClockResult(ClockResult clockResult) {
-        String sql = "insert into clockresult(TRANSACTION_NO, LOYALTY_CARD_NO, CLOCK_RESULT) values " +
-                "(:transactionNo, :loyaltyCardNo, :clockResult)";
+        String sql = "insert into clockresult(transaction_no, loyalty_card_no, clock_result) values " +
+                "('transactionNo', 'loyaltyCardNo', 'clockResult')";
 
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("transactionNo", clockResult.getTransactionNo());
-        parameters.put("loyaltyCardNo", clockResult.getLoyaltyCardNo());
-        parameters.put("clockResult", clockResult.getClockResultXmlString());
+        // parameters.put("transactionNo", clockResult.getTransactionNo().getBytes());
+        //   parameters.put("loyaltyCardNo", clockResult.getLoyaltyCardNo().getBytes());
+        //  parameters.put("clockResult", clockResult.getClockResultXmlString().getBytes());
+
+        parameters.put("transactionNo", "\'AA\'");
+        parameters.put("loyaltyCardNo", "\'BB\'");
+        parameters.put("clockResult", "\'cc\'");
 
         jdbcTemplate.update(sql, parameters);
 
