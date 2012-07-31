@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 
 @Repository
@@ -25,10 +26,11 @@ public class ClockResultJDBCDao implements ClockResultDao {
                 String.class, transactionNo);
     }
 
-    public String getClockResultByLoyaltyCardNo(String loyaltyCardNo) {
-        return jdbcTemplate.queryForObject(
-                "select clock_result from clockresult where loyalty_card_no = ?",
-                String.class, loyaltyCardNo);
+    public List<String> getClockResultByLoyaltyCardNo(String loyaltyCardNo) {
+        String query = "select clock_result from clockresult where loyalty_card_no = ?";
+        Object[] params = {loyaltyCardNo};
+
+        return jdbcTemplate.queryForList(query, String.class, params);
     }
 
     @Override

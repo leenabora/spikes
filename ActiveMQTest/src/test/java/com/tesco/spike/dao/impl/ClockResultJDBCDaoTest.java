@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 import static org.junit.Assert.assertThat;
 
@@ -42,8 +43,17 @@ public class ClockResultJDBCDaoTest {
 
         String clockResult = dao.getClockResultByTransactioNo("t-1");
         assertThat(clockResult, Is.is("<xml></xml>"));
+    }
 
-        clockResult = dao.getClockResultByLoyaltyCardNo("l-1");
-        assertThat(clockResult, Is.is("<xml></xml>"));
+    @Test
+    public void shouldGetClockResultByLoyaltyCardNo() {
+        dao.ingestClockResult(new ClockResult("l-1", "t-1", "<xml></xml>"));
+        dao.ingestClockResult(new ClockResult("l-1", "t-2", "<xml1></xml1>"));
+
+        List<String> clockResult = dao.getClockResultByLoyaltyCardNo("l-1");
+
+        assertThat(clockResult.size(), Is.is(2));
+        assertThat(clockResult.get(0), Is.is("<xml></xml>"));
+        assertThat(clockResult.get(1), Is.is("<xml1></xml1>"));
     }
 }
