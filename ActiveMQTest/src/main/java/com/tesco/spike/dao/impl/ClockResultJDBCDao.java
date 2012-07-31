@@ -14,15 +14,21 @@ public class ClockResultJDBCDao implements ClockResultDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public String getMessage(String messageKey) {
-        return jdbcTemplate.queryForObject(
-                "select message from messages where messagekey = ?",
-                String.class, messageKey);
-    }
-
     @Autowired
     public void createTemplate(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    public String getClockResultByTransactioNo(String transactionNo) {
+        return jdbcTemplate.queryForObject(
+                "select clock_result from clockresult where transaction_no = ?",
+                String.class, transactionNo);
+    }
+
+    public String getClockResultByLoyaltyCardNo(String loyaltyCardNo) {
+        return jdbcTemplate.queryForObject(
+                "select clock_result from clockresult where loyalty_card_no = ?",
+                String.class, loyaltyCardNo);
     }
 
     @Override
