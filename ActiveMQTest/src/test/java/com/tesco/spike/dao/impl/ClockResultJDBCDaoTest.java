@@ -53,8 +53,8 @@ public class ClockResultJDBCDaoTest {
         clockResult1.setClockResultString("<xml></xml>");
         dao.ingestClockResult(clockResult1);
 
-        ClockResult clockResult2 = new ClockResult("l-1", "t-1");
-        clockResult2.setClockResultString("<xml></xml>");
+        ClockResult clockResult2 = new ClockResult("l-1", "t-2");
+        clockResult2.setClockResultString("<xml1></xml1>");
         dao.ingestClockResult(clockResult2);
 
         List<String> clockResult = dao.getClockResultByLoyaltyCardNo("l-1");
