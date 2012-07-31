@@ -39,7 +39,9 @@ public class ClockResultJDBCDaoTest {
 
     @Test
     public void shouldSaveClockResult() {
-        dao.ingestClockResult(new ClockResult("l-1", "t-1", "<xml></xml>"));
+        ClockResult clockResult1 = new ClockResult("l-1", "t-1");
+        clockResult1.setClockResultString("<xml></xml>");
+        dao.ingestClockResult(clockResult1);
 
         String clockResult = dao.getClockResultByTransactioNo("t-1");
         assertThat(clockResult, Is.is("<xml></xml>"));
@@ -47,8 +49,13 @@ public class ClockResultJDBCDaoTest {
 
     @Test
     public void shouldGetClockResultByLoyaltyCardNo() {
-        dao.ingestClockResult(new ClockResult("l-1", "t-1", "<xml></xml>"));
-        dao.ingestClockResult(new ClockResult("l-1", "t-2", "<xml1></xml1>"));
+        ClockResult clockResult1 = new ClockResult("l-1", "t-1");
+        clockResult1.setClockResultString("<xml></xml>");
+        dao.ingestClockResult(clockResult1);
+
+        ClockResult clockResult2 = new ClockResult("l-1", "t-1");
+        clockResult2.setClockResultString("<xml></xml>");
+        dao.ingestClockResult(clockResult2);
 
         List<String> clockResult = dao.getClockResultByLoyaltyCardNo("l-1");
 

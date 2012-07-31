@@ -2,14 +2,17 @@ package com.tesco.spike.vo;
 
 public class ClockResult {
 
-    private final String loyaltyCardNo;
-    private final String transactionNo;
-    private final String clockResultXmlString;
+    private String loyaltyCardNo;
+    private String transactionNo;
+    private String clockResultString;
 
-    public ClockResult(String loyaltyCardNo, String transactionNo, String clockResultXmlString) {
+    public ClockResult(String loyaltyCardNo, String transactionNo) {
         this.loyaltyCardNo = loyaltyCardNo;
         this.transactionNo = transactionNo;
-        this.clockResultXmlString = clockResultXmlString;
+    }
+
+    public void setClockResultString(String clockResultString) {
+        this.clockResultString = clockResultString;
     }
 
     public String getLoyaltyCardNo() {
@@ -20,7 +23,7 @@ public class ClockResult {
         return transactionNo;
     }
 
-    public String getClockResultXmlString() {
-        return clockResultXmlString;
+    public String getClockResultString() {
+        return clockResultString;
     }
 }

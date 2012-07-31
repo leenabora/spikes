@@ -33,7 +33,7 @@ public class ClockResultParser {
         String expression = "/ClockResult/Basket/BasketHeader/ClubcardNo";
         String loyaltyCardNo = getNodeValue(doc, xpath, expression);
 
-        return new ClockResult(loyaltyCardNo, formTransactionNo(doc), clockResult);
+        return new ClockResult(loyaltyCardNo, formTransactionNo(doc));
     }
 
     private String formTransactionNo(Document doc) throws XPathExpressionException {

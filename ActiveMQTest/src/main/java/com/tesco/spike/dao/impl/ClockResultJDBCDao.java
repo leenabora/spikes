@@ -38,7 +38,7 @@ public class ClockResultJDBCDao implements ClockResultDao {
         String sql = "insert into clockresult(transaction_no, loyalty_card_no, clock_result) values " +
                 "(?,?,?)";
 
-        Object[] obj = {clockResult.getTransactionNo(), clockResult.getLoyaltyCardNo(), clockResult.getClockResultXmlString()};
+        Object[] obj = {clockResult.getTransactionNo(), clockResult.getLoyaltyCardNo(), clockResult.getClockResultString()};
         jdbcTemplate.update(sql, obj);
     }
 }

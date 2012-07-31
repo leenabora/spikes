@@ -4,8 +4,6 @@ import com.tesco.spike.dao.ClockResultDao;
 import com.tesco.spike.vo.ClockResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClockService {
@@ -16,18 +14,23 @@ public class ClockService {
     @Autowired
     private ClockResultDao clockResultDao;
 
+    @Autowired
+    private JsonConverter jsonConverter;
+
     public ClockService() {
 
     }
 
-    public ClockService(ClockResultParser parser, ClockResultDao dao) {
+    public ClockService(ClockResultParser parser, ClockResultDao dao,JsonConverter jsonConverter) {
         this.clockResultParser = parser;
         this.clockResultDao = dao;
+        this.jsonConverter = jsonConverter;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void ingestClockResult(String clockResultXmlString) throws Exception {
         ClockResult clockResult = clockResultParser.parse(clockResultXmlString);
+
+        clockResult.setClockResultString(jsonConverter.fromXml(clockResultXmlString));
 
         clockResultDao.ingestClockResult(clockResult);
     }
