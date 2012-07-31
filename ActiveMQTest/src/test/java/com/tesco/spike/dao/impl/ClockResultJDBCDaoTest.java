@@ -1,10 +1,12 @@
 package com.tesco.spike.dao.impl;
 
+import com.tesco.spike.vo.ClockResult;
 import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -25,13 +27,18 @@ public class ClockResultJDBCDaoTest {
         dao = new ClockResultJDBCDao();
         dao.createTemplate(dataSource);
 
-        //Clean Database
-        String tables = "clockresult";
+        cleanDatabase();
+    }
+
+    private void cleanDatabase() {
+        String query = "DELETE FROM ClockResult";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update(query);
     }
 
     @Test
     public void shouldSaveClockResult() {
-        //dao.ingestClockResult(new ClockResult("l-1", "t-1", "<xml></xml>"));
+        dao.ingestClockResult(new ClockResult("l-1", "t-1", "<xml></xml>"));
 
         String clockResult = dao.getClockResultByTransactioNo("t-1");
         assertThat(clockResult, Is.is("<xml></xml>"));
