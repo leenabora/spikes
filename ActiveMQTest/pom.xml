@@ -121,6 +121,13 @@
             <artifactId>commons-pool</artifactId>
             <version>20030825.183949</version>
         </dependency>
+        
+        <dependency>
+            <groupId>ojdbc</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>5</version>
+        </dependency>
+        
         <!-- Jersey dependencies -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
