@@ -32,7 +32,10 @@
         <constructor-arg value="clockQueue"/>
     </bean>
 
-    <bean id="clockRouteBuilder" class="com.tesco.spike.ClockRouteBuilder"></bean>
+    <bean id="clockRouteBuilder" class="com.tesco.spike.ClockRouteBuilder">
+        <property name="threadPoolSize" value="${camel.threadPoolSize}" />
+        <property name="maxThreadPoolSize" value="${camel.maxThreadPoolSize}" />
+    </bean>
 
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="cachedConnectionFactory" />

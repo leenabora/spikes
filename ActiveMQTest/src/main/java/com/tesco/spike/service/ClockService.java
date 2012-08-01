@@ -5,7 +5,7 @@ import com.tesco.spike.vo.ClockResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("clockService")
 public class ClockService {
 
     @Autowired
