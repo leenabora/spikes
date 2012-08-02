@@ -27,9 +27,13 @@ public class ComplexProducer {
         for (int i = 0; i < 50; i++) {
             String msg = getData();
             if (msg != null) {
-                msg=msg.replace("3", Integer.toString(i));
+                msg = msg.replace("3", Integer.toString(i));
+                msg = msg.replace("replace-", "date-" + System.currentTimeMillis());
+                if (i > 9 && i % 10 == 0) {
+                    msg = msg.replace("cardno", "cardno-" + System.currentTimeMillis());
+                }
                 sendMessage(msg);
-                System.out.println(Thread.currentThread().getName()+"Sent message " + msg);
+                System.out.println(Thread.currentThread().getName() + "Sent message " + msg);
             }
         }
     }

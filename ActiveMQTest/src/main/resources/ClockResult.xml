@@ -7,12 +7,12 @@
             <TillNo>3</TillNo>
             <ReceiptNo>3</ReceiptNo>
             <Cashier>stri3</Cashier>
-            <Date>2008-03-29T07:19:45</Date>
+            <Date>replace-2008-03-29T07:19:45</Date>
             <CheckOutBankNo>3</CheckOutBankNo>
             <Country>stri3</Country>
             <Currency>stri3</Currency>
             <!--Optional:-->
-            <ClubcardNo>string3</ClubcardNo>
+            <ClubcardNo>cardno</ClubcardNo>
             <BasketTotal>10003.00</BasketTotal>
             <Training>true</Training>
         </BasketHeader>
