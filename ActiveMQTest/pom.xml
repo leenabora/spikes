@@ -37,6 +37,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>3.1.0.RELEASE</version>
         </dependency>
@@ -180,6 +185,9 @@
 
     </dependencies>
     <build>
+        <finalName>
+            clockdatastore
+        </finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
