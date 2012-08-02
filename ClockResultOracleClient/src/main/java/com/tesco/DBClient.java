@@ -11,24 +11,32 @@ public class DBClient {
         try {
 
             if (args == null) {
-                System.out.println("Usage: ");
+                usage();
                 System.exit(0);
             }
 
             if (args.length < 2) {
                 System.out.println("Insufficient arguments...");
+                usage();
                 System.exit(0);
             }
 
+            System.out.println("");
+            System.out.println("---------------------------------------------------------------");
             String dbUrl = args[0];
-
             int basketCount = Integer.parseInt(args[1]);
+
+            System.out.println("Database Url: " + dbUrl);
+            System.out.println("basketCount: " + basketCount);
+            System.out.println("");
 
             DBClient dbClient = new DBClient();
             dbClient.createAndSendData(dbUrl, basketCount);
 
-            System.out.println("Done.");
+            System.out.println("");
 
+            System.out.println("Done.");
+            System.out.println("---------------------------------------------------------------");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,13 +44,25 @@ public class DBClient {
 
     private static void usage() {
         System.out.println("---------------------------------------------------------------");
+        System.out.println("");
+        System.out.println("Usage: ");
+        System.out.println("java  -jar  dbclient-1.0-jar-with-dependencies.jar   <oracle_url>   <basket_count>");
+        System.out.println("");
+        System.out.println("Example: ");
+        System.out.println("java  -jar dbclient-1.0-jar-with-dependencies.jar  jdbc:oracle:thin:test/test@localhost:1521:xe    10");
+        System.out.println("This will insert 10 baskets in the database. ");
+        System.out.println("As per above url Database Details: ");
+        System.out.println("Host:localhost, port:1521, username:test, password:test, sid:xe ");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("---------------------------------------------------------------");
     }
 
     private void createAndSendData(String dbUrl, int basketCount) throws Exception {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            System.out.println("started....");
+            System.out.println("started....will insert " + basketCount + " baskets......");
             //STEP 2: Register JDBC driver
             Class.forName("oracle.jdbc.OracleDriver");
 
@@ -51,33 +71,34 @@ public class DBClient {
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(dbUrl);
 
-            //STEP 4: Execute a query
-            System.out.println("Creating statement...");
             stmt = conn.prepareStatement("INSERT INTO clockresult(transaction_no, loyalty_card_no, clock_result) VALUES (?,?,?)");
 
-            String transactionNo = "transNo";
-            String loyaltyCardNo = "loyaltyCardNo";
+            String transactionNo = "transNo-" + System.currentTimeMillis();
+            String loyaltyCardNo = "loyaltyCardNo-" + System.currentTimeMillis();
 
             String msg = getData();
             String cardNo = null;
             for (int i = 0; i < basketCount; i++) {
                 if (msg != null) {
-                    stmt.setString(1, transactionNo + "-" + i);
+                    stmt.setString(1, i + "-" + transactionNo);
 
-                    if (basketCount % 100 == 0) {
-                        cardNo = loyaltyCardNo + "-" + i;
+                    if (i > 100 && basketCount % 100 == 0) {
+                        cardNo = i + "-" + loyaltyCardNo;
+                        System.out.println(i + " baskets are inserted uptil now.");
+                    } else {
+                        cardNo = loyaltyCardNo;
                     }
                     stmt.setString(2, cardNo);
 
                     String message = msg.replace("3", Integer.toString(i));
                     Reader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(message.getBytes())));
-                    stmt.setClob(3, reader);
+                    stmt.setString(3, message);
 
                     stmt.executeUpdate();
                 }
             }
         } finally {
-            if (stmt != null){
+            if (stmt != null) {
                 stmt.close();
                 conn.close();
             }

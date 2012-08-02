@@ -59,6 +59,51 @@
                 <Price PreDiscount="1000.00" Apportioned="1000.00"/>
             </Offer>
         </BasketItem>
+        <BasketItem Barcode="string3" Quantity="1.5E2" UnitOfMeasure="string">
+            <Tesco IsOnPromotion="true" IsComparable="true">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Tesco>
+            <!--Zero or more repetitions:-->
+            <Offer IsOnPromotion="true" OfferId="3">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Offer>
+        </BasketItem>
+        <BasketItem Barcode="string3" Quantity="1.5E2" UnitOfMeasure="string">
+            <Tesco IsOnPromotion="true" IsComparable="true">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Tesco>
+            <!--Zero or more repetitions:-->
+            <Offer IsOnPromotion="true" OfferId="3">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Offer>
+        </BasketItem>
+        <BasketItem Barcode="string3" Quantity="1.5E2" UnitOfMeasure="string">
+            <Tesco IsOnPromotion="true" IsComparable="true">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Tesco>
+            <!--Zero or more repetitions:-->
+            <Offer IsOnPromotion="true" OfferId="3">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Offer>
+        </BasketItem>
+        <BasketItem Barcode="string3" Quantity="1.5E2" UnitOfMeasure="string">
+            <Tesco IsOnPromotion="true" IsComparable="true">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Tesco>
+            <!--Zero or more repetitions:-->
+            <Offer IsOnPromotion="true" OfferId="3">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Offer>
+        </BasketItem>
+        <BasketItem Barcode="string3" Quantity="1.5E2" UnitOfMeasure="string">
+            <Tesco IsOnPromotion="true" IsComparable="true">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Tesco>
+            <!--Zero or more repetitions:-->
+            <Offer IsOnPromotion="true" OfferId="3">
+                <Price PreDiscount="1000.00" Apportioned="1000.00"/>
+            </Offer>
+        </BasketItem>
     </Basket>
     <!--1 or more repetitions:-->
     <Components>
@@ -102,6 +147,63 @@
         </Component>
 
         <Component>
+            <Name>
+                <ClassName>string3</ClassName>
+                <AssemblyName>string</AssemblyName>
+                <Version>string</Version>
+                <!--Optional:-->
+                <Culture>string</Culture>
+                <!--Optional:-->
+                <PublicKeyToken>string</PublicKeyToken>
+            </Name>
+            <!--Optional:-->
+            <Properties>
+                <!--1 or more repetitions:-->
+                <Property Name="string">string</Property>
+            </Properties>
+            <!--Optional:-->
+            <Components>anyType</Components>
+        </Component>
+
+    <Component>
+            <Name>
+                <ClassName>string3</ClassName>
+                <AssemblyName>string</AssemblyName>
+                <Version>string</Version>
+                <!--Optional:-->
+                <Culture>string</Culture>
+                <!--Optional:-->
+                <PublicKeyToken>string</PublicKeyToken>
+            </Name>
+            <!--Optional:-->
+            <Properties>
+                <!--1 or more repetitions:-->
+                <Property Name="string">string</Property>
+            </Properties>
+            <!--Optional:-->
+            <Components>anyType</Components>
+        </Component>
+
+    <Component>
+            <Name>
+                <ClassName>string3</ClassName>
+                <AssemblyName>string</AssemblyName>
+                <Version>string</Version>
+                <!--Optional:-->
+                <Culture>string</Culture>
+                <!--Optional:-->
+                <PublicKeyToken>string</PublicKeyToken>
+            </Name>
+            <!--Optional:-->
+            <Properties>
+                <!--1 or more repetitions:-->
+                <Property Name="string">string</Property>
+            </Properties>
+            <!--Optional:-->
+            <Components>anyType</Components>
+        </Component>
+
+    <Component>
             <Name>
                 <ClassName>string3</ClassName>
                 <AssemblyName>string</AssemblyName>
