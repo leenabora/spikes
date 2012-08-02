@@ -52,7 +52,7 @@ public class ClockResultParser {
         expression = "/ClockResult/Basket/BasketHeader/ReceiptNo";
         String receiptNo = getNodeValue(doc, xpath, expression);
 
-        return dateTime + "-" + branch + "-" + cashier + "-" + tillNo + "-" + receiptNo;
+        return dateTime + "-" + branch + "-" + cashier + "-" + tillNo + "-" + receiptNo + "-" + System.currentTimeMillis();
     }
 
     private String getNodeValue(Document doc, XPath xpath, String expression) throws XPathExpressionException {
